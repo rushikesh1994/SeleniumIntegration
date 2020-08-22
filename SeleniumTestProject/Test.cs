@@ -19,9 +19,9 @@ namespace SeleniumTestProject
         [Test]
         public void Search()
         {
-            var chromeoptions = new ChromeOptions();
-            chromeoptions.AddArgument("headless");
-            IWebDriver driver = new ChromeDriver(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), chromeoptions);
+            //var chromeoptions = new ChromeOptions();
+            //chromeoptions.AddArgument("headless");
+            IWebDriver driver = new ChromeDriver();
             driver.Navigate().GoToUrl("https://www.google.com");
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             driver.FindElement(By.Name("q")).SendKeys("Testing" + Keys.Enter);
