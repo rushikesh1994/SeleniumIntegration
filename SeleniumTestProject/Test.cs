@@ -3,29 +3,33 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 using System.Text;
 
 namespace SeleniumTestProject
 {
     class Test
     {
-        IWebDriver driver = new ChromeDriver();
         [SetUp]
         public void Setup()
         {
-            driver.Navigate().GoToUrl("https://www.google.com");
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            
         }
         [Test]
         public void Search()
         {
+            var chromeoptions = new ChromeOptions();
+            chromeoptions.AddArgument("headless");
+            IWebDriver driver = new ChromeDriver(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), chromeoptions);
+            driver.Navigate().GoToUrl("https://www.google.com");
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             driver.FindElement(By.Name("q")).SendKeys("Testing" + Keys.Enter);
-
+            driver.Quit();
         }
         [TearDown]
         public void CloseBrowser()
         {
-            driver.Quit();
         }
     }
 }
