@@ -20,6 +20,7 @@ namespace SeleniumTestProject
         public void Search()
         {
             driver.FindElement(By.Name("q")).SendKeys("Testing" + Keys.Enter);
+
         }
         [TearDown]
         public void CloseBrowser()
